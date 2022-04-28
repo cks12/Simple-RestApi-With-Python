@@ -1,4 +1,4 @@
-from time import sleep
+import ast
 from uuid import uuid4
 import pandas as pd
 
@@ -17,3 +17,16 @@ class Users_db:
         self._data_ = pd.concat([new_data,self._data_])
         self._data_.to_csv(self._db_Loc_, index=False)
         return obj
+    
+    def update_User(self, obj:dict):
+        try:
+            data = self.get_database()
+            userData = data[data["userId"] == obj["userId"]]
+            userData["locations"] = userData["locations"].values[0].append(obj["location"])
+            self._data_.to_csv(self._db_Loc_, index=False)
+            return {data} 
+        except:
+            return {
+                "err": "{} user not found".format(obj["userId"])
+            }
+        

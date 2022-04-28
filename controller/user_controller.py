@@ -21,4 +21,13 @@ class Users(Resource, Users_db):
 		parser.add_argument("locations")
 		args = parser.parse_args()
 		data = self.set_newUserInDataBase(args)
-		return {"users":data}, 200
+		return {"user":data}, 200
+	
+	def put(self):
+		parser = reqparse.RequestParser()
+		parser.add_argument("userId",required=True )
+		parser.add_argument("location",required=True )
+		args = parser.parse_args()
+		data = self.update_User(args)
+		print(data)
+		return 200
