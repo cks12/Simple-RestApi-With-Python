@@ -6,3 +6,4 @@ if __name__ == "__main__":
 	app.api.add_resource(Users,"/users")
 	app.api.add_resource(main,"/")
 	app.app.run(port=3333)
+	
