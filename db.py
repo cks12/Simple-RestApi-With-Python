@@ -52,11 +52,7 @@ class Users_db:
     
     def update_User(self, obj:dict):
         try:
-            data = self.get_database()
-            userData = data[data["userId"] == obj["userId"]]
-            userData["locations"] = userData["locations"].values[0].append(obj["location"])
-            self._data_.to_csv(self._db_Loc_, index=False)
-            return {data} 
+            user = self._data_.find(obj["userId"])
         except:
             return {
                 "err": "{} user not found".format(obj["userId"])
